@@ -1,5 +1,5 @@
 # esri-redux
-> Simple boilerplate demonstrating how to setup a project using React, Redux, Flow, and the Esri JavaScript API. Demo available at [https://robert-w.github.io/esri-redux/](https://robert-w.github.io/esri-redux/)
+> Simple boilerplate demonstrating how to setup a project using React, Redux, and the Esri JavaScript API. Demo available at [https://robert-w.github.io/esri-redux/](https://robert-w.github.io/esri-redux/)
 
 ### Getting started
 This project requires [Node.js](https://nodejs.org/en/)
@@ -15,7 +15,7 @@ This project requires [Node.js](https://nodejs.org/en/)
 > Starts the babel-cli, watches your html and sass files for changes, and starts browser-sync with live reload.  Generated/copied files will end up in the build directory which is where browser-sync serves from.
 
 `npm test`
-> Tests all src files with eslint and runs flow against all the files that have opted in (via the /\* @flow \*/ comment).
+> Tests all src files with eslint.
 
 `npm run dist`
 > Generates an optimized build in the `dist` directory. It uses gulp-sass for sass files, gulp-replace to inject critical.css into the html, and rollup to transpile ES6 modules to AMD before RequireJS optimizer comes in to minify and bundle in built libraries. For more info, see [Building - Rollup & RequireJS](building-rollup-requirejs).
@@ -25,14 +25,11 @@ This project requires [Node.js](https://nodejs.org/en/)
 
 ### Tooling
 
-#### Type Checking - Flow
-This project demonstrated the basics of Flow and how to set it up and test it. I will try to add more advanced Flow options and configurations as time goes on and I learn more about how Flow works. There are also other enhancements I would like to add, like live Flow checking with `linter-flow` in Atom.
-
 #### CSS Preprocessing - Sass
 This uses gulp-sass at the moment for portability, but it may be switched for the official sass Ruby gem at some point if it becomes necessary, for now this works.
 
 #### ES6 - Babel
-This uses Babel for transpiling the build, it also uses `React`, `es2015`, and `stage-0` presets so I can play with the latest ES6 features.  It will strip the Flow types from the code when it compiles to AMD so that there is no issue at runtime in the browser.
+This uses Babel for transpiling the build, it also uses `React`, `es2015`, and `stage-0` presets so I can play with the latest ES6 features. It compiles to AMD via babel plugins in develop and rollup in production builds so that there is no issue at runtime.
 
 #### Building - Rollup & RequireJS
 Rollup seems more efficient for ES6 modules than babel as it will bundle them and eliminate duplicate polyfills or babel helpers, such as classCallCheck or createClass.  However it does not work well when trying to bundle in built UMD modules, or atleast I have not figured out the configuration for that yet, so I use requirejs optimizer to come in after rollup and combine the bundled js file with React and Redux.  If you choose to load those libraries from a CDN, which is a good idea, you can omit requirejs and use rollup with an uglifier to minify the bundle after rollup creates it.  This would make the bundle much lighter since it would not need React and Redux included.  I am still looking for a easier solution for an all-inclusive bundle with rollup so this may change if I figure it out or if rollup support seems to fade.
@@ -59,7 +56,6 @@ If you run `npm secure` it will load a browser sync server using https but it wi
 #### Resources
 * [React](https://facebook.github.io/react/)
 * [Redux](http://redux.js.org/)
-* [Flow](http://flowtype.org/)
 * [Rollup](http://rollupjs.org/)
 * [RequireJS](http://requirejs.org/docs/optimization.html)
 * [ArcGIS JavaScript API](https://js.arcgis.com)
