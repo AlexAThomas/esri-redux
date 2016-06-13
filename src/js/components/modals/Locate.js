@@ -1,14 +1,9 @@
-/* @flow */
 import {toggleLocateModal} from 'js/actions/mapActions';
 import Wrapper from 'js/components/modals/Wrapper';
 import React, { Component } from 'react';
 import appStore from 'js/appStore';
-// Type Import
-import type {ModalProps} from './Types';
 
 export default class LocateModal extends Component {
-
-  props: ModalProps;
 
   close:Function = () => {
     appStore.dispatch(toggleLocateModal({ visible: false }));

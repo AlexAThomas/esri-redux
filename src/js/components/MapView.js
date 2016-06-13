@@ -10,20 +10,12 @@ import appStore from 'js/appStore';
 import MapView from 'esri/views/MapView';
 import EsriMap from 'esri/Map';
 
-type AppState = {
-  locateModalVisible: bool,
-  shareModalVisible: bool,
-  viewReady: bool
-};
-
 export default class Map extends Component {
 
   displayName: 'Map';
-  state: AppState;
-  unsubscribe: Function;
 
-  state: AppState = appStore.getState();
-  view: EsriView = {};
+  state = appStore.getState();
+  view = {};
 
   componentDidMount() {
     // Subscribe to the store for updates
@@ -48,7 +40,7 @@ export default class Map extends Component {
     this.unsubscribe();
   }
 
-  storeDidUpdate:Function = () => {
+  storeDidUpdate = () => {
     this.setState(appStore.getState());
   };
 

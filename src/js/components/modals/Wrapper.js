@@ -1,4 +1,3 @@
-/* @flow */
 import React, { Component } from 'react';
 
 const stylesheet:any = {
@@ -47,16 +46,7 @@ const stylesheet:any = {
   }
 };
 
-type ModalWrapperProps = {
-  visible: bool,
-  close: Function,
-  theme?: string,
-  children?: any
-};
-
 export default class ModalWrapper extends Component {
-
-  props: ModalWrapperProps;
 
   render () {
     const { visible, close, theme} = this.props;
