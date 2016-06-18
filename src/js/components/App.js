@@ -1,6 +1,6 @@
 /* @flow */
 import MapView from 'js/components/MapView';
-import Header from 'js/components/Header';
+import AppBar from 'material-ui/AppBar';
 import React, {Component} from 'react';
 import {text} from 'js/config';
 
@@ -12,7 +12,7 @@ export default class App extends Component {
   render () {
     return (
       <div className='root'>
-        <Header title={text.title} subtitle={text.subtitle} />
+        <AppBar title={text.title} showMenuIconButton={false} />
         <MapView />
       </div>
     );

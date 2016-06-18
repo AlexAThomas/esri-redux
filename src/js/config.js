@@ -6,8 +6,7 @@ export const initialState = {
 };
 
 export const text = {
-  title: 'Esri Redux Example',
-  subtitle: 'Example with Redux, React, Esri, Sass, and more.'
+  title: 'Esri Material UI'
 };
 
 export const mapOptions = {

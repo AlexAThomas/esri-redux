@@ -1,14 +1,23 @@
 /* @flow */
 import {toggleShareModal, toggleLocateModal} from 'js/actions/mapActions';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import MyLocation from 'material-ui/svg-icons/maps/my-location';
+import Remove from 'material-ui/svg-icons/content/remove';
+import Share from 'material-ui/svg-icons/social/share';
+import Add from 'material-ui/svg-icons/content/add';
 import React, {Component} from 'react';
 import appStore from 'js/appStore';
 
-const zoomOutSvg = '<use xlink:href="#icon-zoom-out" />',
-      zoomInSvg = '<use xlink:href="#icon-zoom-in" />',
-      locateSvg = '<use xlink:href="#icon-locate" />',
-      shareSvg = '<use xlink:href="#icon-share" />';
-
 const animationOptions = { duration: 300 };
+const styles = {
+  button: {
+    margin: '0.25em'
+  },
+  share: {
+    height: 20,
+    width: 20
+  }
+};
 
 type ControlsProps = {
   view: EsriView
@@ -42,37 +51,19 @@ export default class Controls extends Component {
 
   render () {
     return (
-      <div className='map-controls shadow'>
-        <ul className='map-controls__list'>
-          <li className='map-controls__item pointer' onClick={this.zoomOut}>
-            <svg
-              role='img'
-              aria-label='Zoom out'
-              className='map-controls__item-icon'
-              dangerouslySetInnerHTML={{ __html: zoomOutSvg }} />
-          </li>
-          <li className='map-controls__item pointer' onClick={this.zoomIn}>
-            <svg
-              role='img'
-              aria-label='Zoom in'
-              className='map-controls__item-icon'
-              dangerouslySetInnerHTML={{ __html: zoomInSvg }} />
-          </li>
-          <li className='map-controls__item pointer' onClick={this.share}>
-            <svg
-              role='img'
-              aria-label='Share your experience'
-              className='map-controls__item-icon'
-              dangerouslySetInnerHTML={{ __html: shareSvg }} />
-          </li>
-          <li className='map-controls__item pointer' onClick={this.locate}>
-            <svg
-              role='img'
-              aria-label='Find my location'
-              className='map-controls__item-icon'
-              dangerouslySetInnerHTML={{ __html: locateSvg }} />
-          </li>
-        </ul>
+      <div className='map-controls'>
+        <FloatingActionButton mini={true} style={styles.button} onClick={this.zoomIn}>
+          <Add />
+        </FloatingActionButton>
+        <FloatingActionButton mini={true} style={styles.button} onClick={this.zoomOut}>
+          <Remove />
+        </FloatingActionButton>
+        <FloatingActionButton mini={true} secondary={true} style={styles.button} onClick={this.share}>
+          <Share style={styles.share} />
+        </FloatingActionButton>
+        <FloatingActionButton mini={true} secondary={true} style={styles.button} onClick={this.locate}>
+          <MyLocation />
+        </FloatingActionButton>
       </div>
     );
   }

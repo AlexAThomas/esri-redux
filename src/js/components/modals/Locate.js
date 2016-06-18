@@ -1,7 +1,8 @@
 /* @flow */
 import {toggleLocateModal} from 'js/actions/mapActions';
-import Wrapper from 'js/components/modals/Wrapper';
+import FlatButton from 'material-ui/FlatButton';
 import React, { Component } from 'react';
+import Dialog from 'material-ui/Dialog';
 import appStore from 'js/appStore';
 // Type Import
 import type {ModalProps} from './Types';
@@ -10,17 +11,28 @@ export default class LocateModal extends Component {
 
   props: ModalProps;
 
-  close:Function = () => {
+  handleClose:Function = () => {
     appStore.dispatch(toggleLocateModal({ visible: false }));
   };
 
   render () {
     const {visible} = this.props;
+    const dialogActions = [
+      <FlatButton
+        label="Cancel"
+        secondary={true}
+        onTouchTap={this.handleClose}
+      />
+    ];
 
     return (
-      <Wrapper theme='locate-modal' visible={visible} close={this.close}>
-        <h3>Locate Something</h3>
-      </Wrapper>
+      <Dialog
+        title='Locate'
+        modal={false}
+        open={visible}
+        actions={dialogActions}
+        onRequestClose={this.handleClose}
+      />
     );
   }
 }
