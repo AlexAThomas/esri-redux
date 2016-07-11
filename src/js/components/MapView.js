@@ -1,4 +1,3 @@
-/* @flow */
 import {viewCreated, getItemInfo} from 'js/actions/mapActions';
 import LocateModal from 'js/components/modals/Locate';
 import ShareModal from 'js/components/modals/Share';
@@ -11,7 +10,6 @@ import MapView from 'esri/views/MapView';
 import EsriMap from 'esri/Map';
 
 export default class Map extends Component {
-
   displayName: 'Map';
 
   state = appStore.getState();

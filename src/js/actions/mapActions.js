@@ -1,7 +1,7 @@
 import { VIEW_READY, TOGGLE_SHARE, TOGGLE_LOCATE, FETCH_ITEM_INFO } from 'js/constants/actionTypes';
 import api from 'js/utils/api';
 
-export function viewCreated (): ReduxAction {
+export function viewCreated () {
   return { type: VIEW_READY };
 }
 
