@@ -6,18 +6,16 @@ const styles = {
 /**
 * Async middleware to support asynchronous actions
 */
-export const async = (store) => (next) => {
-  return (action) => typeof action === 'function' ? action(store.dispatch) : next(action);
+export const asyncActions = (api) => (next) => (action) => {
+  return typeof action === 'function' ? action(api.dispatch) : next(action);
 };
 
 /**
 * Logging middleware to log all dispatches and updates
 */
-export const logger = (store) => (next) => {
-  return (action) => {
-    const result = next(action);
-    console.log(`%c ${action.type}:`, styles.actionType, action);
-    console.log('%c next state', styles.stateLabel, store.getState());
-    return result;
-  };
+export const logger = (api) => (next) => (action) => {
+  const result = next(action);
+  console.log(`%c ${action.type}:`, styles.actionType, action);
+  console.log('%c next state', styles.stateLabel, api.getState());
+  return result;
 };

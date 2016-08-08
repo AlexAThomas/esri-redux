@@ -7,7 +7,9 @@ export default {
   * @param {string} appid - Application Id or Webmap Id to get info about
   */
   getItemInfo: function (appid) {
-    return esriRequest(urls.itemInfo(appid), { responseType: 'json' });
+    return esriRequest(urls.itemInfo(appid), {
+      responseType: 'json'
+    });
   }
 
 };

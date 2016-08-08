@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const stylesheet:any = {
+const stylesheet = {
   modalContainer: {
     position: 'fixed',
     height: '100%',
@@ -52,7 +52,7 @@ export default class ModalWrapper extends Component {
     const { visible, close, theme} = this.props;
     let containerStyle = Object.assign({}, stylesheet.modalContainer);
     //- Build up the attributes
-    const modalAttrs:any = {
+    const modalAttrs = {
       style: stylesheet.modal
     };
 

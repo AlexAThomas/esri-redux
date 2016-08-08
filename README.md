@@ -5,10 +5,13 @@
 This project requires [Node.js](https://nodejs.org/en/)
 
 1. `npm install`
-2. `npm start` or `npm secure`
-3. Open `http://localhost:3000` or `https://localhost:3000`
+2. `npm start`
 
-`npm install` will install most dependencies and on `postinstall`, bower will install the rest.  This project has browser sync setup with live reload, so it will refresh as you develop.
+This project has browser sync setup with live reload, so it will refresh as you develop.
+
+### Additional Branches
+1. [`master-noflow`](https://github.com/Robert-W/esri-redux/tree/master-noflow) - Same as this branch but without Flow Type checker implemented.
+2. [`material-ui`](https://github.com/Robert-W/esri-redux/tree/material-ui) - Branch very similar to this, but demonstrating that with Webpack, we can incorporate nice UI libraries easily. Check out the documentation on [material-ui](http://www.material-ui.com/) to see what else you can do with this branch as a starting point.
 
 ### NPM scripts
 `npm start`
@@ -53,9 +56,9 @@ style-src 'self' js.arcgis.com 'unsafe-inline';
 ### HTTP/2 & HTTPS
 There are currently multiple options for HTTPS but only one for an HTTP/2 setup. The easiest way to run https is to run `npm run secure`.  It will load a browser sync server using https but will show as unsecure unless you have signed certs for localhost. The other option is to use [Caddy](https://caddyserver.com/).  It is really easy to install and configure.  This will run an HTTP/2 and HTTPS-enabled server for you once you generate some local self-signed certs.  Here is how to set that up.
 
-1. [Download Caddy](https://caddyserver.com/docs/getting-started), you may need [Go](https://golang.org/) installed.
-2. Setup local certs, you can run the command `openssl req -new -newkey rsa:2048 -sha256 -days 365 -nodes -x509 -keyout cert.key -out cert.crt`, this will prompt you for a few questions and then generate the certs for you, this does require `openssl` to be installed.
-3. Run `sudo caddy` to start the caddy server, you can see the server configuration in the `Caddyfile`.
+1. [Download Caddy](https://caddyserver.com/docs/getting-started), you can also install with `brew install caddy` if you have homebrew installed. You will need atleast version `0.9`.
+2. Run `sudo caddy` to start the caddy server, it is configured in the `Caddyfile`. Caddy is configured to use self-signed certs for local development, browsers will flag self-signed certs as untrusted but they are ok for local development.
+3. [**Optional**] -Another option for self-signed certs is to set them up yourself. You can run the command `openssl req -new -newkey rsa:2048 -sha256 -days 365 -nodes -x509 -keyout cert.key -out cert.crt`, this will prompt you for a few questions and then generate the certs for you, this does require `openssl` to be installed and then you need to configure tls in the Caddfile like so: `tls cert.crt cert.key`. This is the same as step 2 except that you will not need to allow access each time you restart caddy.
 
 Now your running HTTP/2 with automatic HTTPS enabled!! This does not do hot module replacement or live reload or anything like that, however, after you generate a build with `npm run dist`, you can run Caddy and test your app out on HTTP/2 and HTTPS.
 
