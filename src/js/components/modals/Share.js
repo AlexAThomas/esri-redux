@@ -5,7 +5,7 @@ import appStore from 'js/appStore';
 
 export default class ShareModal extends Component {
 
-  close:Function = () => {
+  close = () => {
     appStore.dispatch(toggleShareModal({ visible: false }));
   };
 

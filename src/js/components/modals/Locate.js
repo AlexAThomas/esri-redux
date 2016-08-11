@@ -5,7 +5,7 @@ import appStore from 'js/appStore';
 
 export default class LocateModal extends Component {
 
-  close:Function = () => {
+  close = () => {
     appStore.dispatch(toggleLocateModal({ visible: false }));
   };
 
