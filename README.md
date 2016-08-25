@@ -21,9 +21,6 @@ This project requires [Node.js](https://nodejs.org/en/)
 `npm run dist`
 > Generates an optimized build in the `dist` directory. It uses webpack to transpile, bundle, and minify the src as well as many other things, like inline css and inject hash numbers into html for optimal performance and automated cache-busting. For more info, see [Building - Webpack](#building---webpack).
 
-`npm run secure`
-> Same as `npm start` but uses HTTPS instead of HTTP. See [HTTPS](#HTTPS).
-
 ### Tooling
 
 #### CSS Preprocessing - Sass
@@ -41,7 +38,7 @@ See [Resources](#resources)
 ### Performance considerations
 1. You should prerender your components by using the `prerender.js` script in the `scripts` folder.  You can configure it there.  This will prerender your react component and inject it into your html.  Once react loads, it will mount to it and start from there.
 2. Async assets when possible.  The ArcGIS Javascript API is loaded with an async tag.  It also will defer loading Esri's CSS until after the above the fold content loads to prevent blocking the rendering of `index.html`.
-3. Inject `critical.css` into `index.html` so that above the fold content does not need another trip to the server to render properly, thus avoiding that annoying flash of un-styled content that some pages have.
+3. Inject `critical.css` into `index.html` so that above the fold content does not need another trip to the server to render properly, thus avoiding that annoying flash of un-styled content that some pages have.  This is automatically handled by webpack already for you.
 
 ### Security
 This has the ability to run in HTTPS since it uses protocol agnostic resources. It also has a Content Security Policy with the following configurations for local resources and `js.arcgis.com` resources, which can be tweaked or removed from the app by modifying it in the head section of `src/index.html`.
