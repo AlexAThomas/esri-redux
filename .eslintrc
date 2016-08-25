@@ -10,26 +10,6 @@
     "modules": true,
     "jsx": true
   },
-  "globals": {
-    "require": true,
-    "EsriView": true,
-    "AppState": true,
-    "State": true,
-    "Action": true,
-    "AsyncAction": true,
-    "Reducer": true,
-    "BaseDispatch": true,
-    "Dispatch": true,
-    "ActionCreator": true,
-    "MiddlewareAPI": true,
-    "Middleware": true,
-    "Store": true,
-    "StoreCreator": true,
-    "StoreEnhancer": true,
-    "ActionCreatorOrObjectOfACs": true,
-    "Reducers": true,
-    "Redux": true
-  },
   "plugins": [
     "react"
   ],

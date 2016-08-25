@@ -7,21 +7,19 @@ This project requires [Node.js](https://nodejs.org/en/)
 1. `npm install`
 2. `npm start`
 
-This project has browser sync setup with live reload, so it will refresh as you develop.
-
 ### Additional Branches
-1. [`master-noflow`](https://github.com/Robert-W/esri-redux/tree/master-noflow) - Same as this branch but without Flow Type checker implemented.
+1. [`master`](https://github.com/Robert-W/esri-redux/tree/master) - Same as this branch but with Flow Type checker implemented.
 2. [`material-ui`](https://github.com/Robert-W/esri-redux/tree/material-ui) - Branch very similar to this, but demonstrating that with Webpack, we can incorporate nice UI libraries easily. Check out the documentation on [material-ui](http://www.material-ui.com/) to see what else you can do with this branch as a starting point.
 
 ### NPM scripts
 `npm start`
-> Starts the babel-cli, watches your html and sass files for changes, and starts browser-sync with live reload.  Generated/copied files will end up in the build directory which is where browser-sync serves from.
+> Starts the babel-cli, watches your html and sass files for changes, and starts an express dev server with hot module replacement enabled.
 
 `npm test`
 > Tests all src files with eslint.
 
 `npm run dist`
-> Generates an optimized build in the `dist` directory. It uses gulp-sass for sass files, gulp-replace to inject critical.css into the html, react-prerender & babel to pre-render components and webpack to transpile, bundle, and minify the src. For more info, see [Building - Webpack](#building---webpack).
+> Generates an optimized build in the `dist` directory. It uses webpack to transpile, bundle, and minify the src as well as many other things, like inline css and inject hash numbers into html for optimal performance and automated cache-busting. For more info, see [Building - Webpack](#building---webpack).
 
 `npm run secure`
 > Same as `npm start` but uses HTTPS instead of HTTP. See [HTTPS](#HTTPS).
@@ -29,20 +27,20 @@ This project has browser sync setup with live reload, so it will refresh as you 
 ### Tooling
 
 #### CSS Preprocessing - Sass
-This uses gulp-sass at the moment for portability, but it may be switched for the official sass Ruby gem at some point if it becomes necessary, for now this works. Also since this uses browser-sync, if you reconfigure the `sass-build` gulp task to only process `app.scss` and put `critical.scss` into a separate task, browser-sync would inject the css into the page without reload.
+This uses a sass loader in webpack so you can just import your scss in your components. Webpack will inject these as style tags in dev mode so you get live reload of css. In production, it will inline `critical.scss` and append `app.scss` into your html for you.
 
 #### ES6 - Babel
 This uses Babel for transpiling the build, it also uses `React`, `es2015`, and `stage-0` presets so I can play with the latest ES6 features. It compiles to AMD via babel plugins in develop and rollup in production builds so that there is no issue at runtime.
 
 #### Building - Webpack
-Webpack and dojo used to not play nice together, but then I saw [https://github.com/lobsteropteryx/esri-webpack](https://github.com/lobsteropteryx/esri-webpack) which cleverly handled the esri dependencies as externals and built to AMD.  Now we have Webpack and dojo working together.  This also uses hot module replacement with gulp/browser-sync so if you edit your components, it can swap them out on the fly without reloading the whole page.
+Webpack and dojo used to not play nice together, but then I saw [https://github.com/lobsteropteryx/esri-webpack](https://github.com/lobsteropteryx/esri-webpack) which cleverly handled the esri dependencies as externals and built to AMD.  Now we have Webpack and dojo working together.  This also uses hot module replacement with an express server so if you edit your components, it can swap them out on the fly without reloading the whole page.
 
 See [Resources](#resources)
 
 
 ### Performance considerations
-1. Prerender with `npm run prerender`, which uses the `prerender.js` script in the root, you can configure it there.  This will prerender your react component and inject it into your html.  This will give the appearance that your components have already rendered when the page loads without having to wait for the JSAPI, React, or your own modules to load.  Once react loads, it will mount to it and start from there.
-2. Async assets when possible.  The ArcGIS Javascript API is loaded with an async tag.  It also will defer loading `app.css` and Esri's CSS until after the above the fold content loads, this is so that those assets don't block the loading of the main `index.html` file.
+1. You should prerender your components by using the `prerender.js` script in the `scripts` folder.  You can configure it there.  This will prerender your react component and inject it into your html.  Once react loads, it will mount to it and start from there.
+2. Async assets when possible.  The ArcGIS Javascript API is loaded with an async tag.  It also will defer loading Esri's CSS until after the above the fold content loads to prevent blocking the rendering of `index.html`.
 3. Inject `critical.css` into `index.html` so that above the fold content does not need another trip to the server to render properly, thus avoiding that annoying flash of un-styled content that some pages have.
 
 ### Security

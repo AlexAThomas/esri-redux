@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node scripts/start",
     "dist": "rm -rf dist;node scripts/build;node scripts/prerender;",
-    "test": "eslint src/js/**/*.js; flow check;"
+    "test": "eslint src/js/**/*.js;"
   },
   "keywords": [
     "hot",
