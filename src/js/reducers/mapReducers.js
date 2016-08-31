@@ -1,4 +1,4 @@
-import { VIEW_READY, TOGGLE_SHARE, TOGGLE_LOCATE, FETCH_ITEM_INFO } from 'js/constants/actionTypes';
+import { VIEW_READY, TOGGLE_SHARE, TOGGLE_LOCATE, FETCH_ITEM_INFO, CHANGE_SHARE_TEXT } from 'js/constants/actionTypes';
 import {initialState} from 'js/config';
 
 export function viewCreated (state = initialState.viewReady, action) {
@@ -17,6 +17,16 @@ export function toggleLocateModal (state = initialState.locateModalVisible, acti
   return type !== TOGGLE_LOCATE ? state : (
     data.visible
   );
+}
+
+export function updateShareText (state = initialState.shareText, action) {
+  const {type, data} = action;
+  switch (type) {
+    case CHANGE_SHARE_TEXT:
+      return data.text;
+    default:
+      return state;
+  }
 }
 
 /**

@@ -1,4 +1,4 @@
-import {toggleShareModal} from 'js/actions/mapActions';
+import {toggleShareModal, updateShareText } from 'js/actions/mapActions';
 import Wrapper from 'js/components/modals/Wrapper';
 import React, { Component } from 'react';
 import appStore from 'js/appStore';
@@ -9,12 +9,19 @@ export default class ShareModal extends Component {
     appStore.dispatch(toggleShareModal({ visible: false }));
   };
 
+  updateShareText = () => {
+    appStore.dispatch(updateShareText({
+      text: 'Some New String'
+    }));
+  };
+
   render () {
-    const {visible} = this.props;
+    const {visible, text} = this.props;
 
     return (
       <Wrapper theme='share-modal' visible={visible} close={this.close}>
-        <h3>Share Something</h3>
+        <h3>{text}</h3>
+        <button onClick={this.updateShareText}>Click Me</button>
       </Wrapper>
     );
   }

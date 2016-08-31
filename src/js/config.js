@@ -1,6 +1,7 @@
 export const initialState = {
   locateModalVisible: false,
   shareModalVisible: false,
+  shareText: 'Share Something',
   viewReady: false,
   itemInfo: {}
 };

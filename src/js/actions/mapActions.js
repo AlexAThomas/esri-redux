@@ -1,4 +1,4 @@
-import { VIEW_READY, TOGGLE_SHARE, TOGGLE_LOCATE, FETCH_ITEM_INFO } from 'js/constants/actionTypes';
+import { VIEW_READY, TOGGLE_SHARE, TOGGLE_LOCATE, FETCH_ITEM_INFO, CHANGE_SHARE_TEXT } from 'js/constants/actionTypes';
 import api from 'js/utils/api';
 
 export function viewCreated () {
@@ -11,6 +11,10 @@ export function toggleShareModal (data) {
 
 export function toggleLocateModal (data) {
   return { type: TOGGLE_LOCATE, data };
+}
+
+export function updateShareText (data) {
+  return { type: CHANGE_SHARE_TEXT, data };
 }
 
 /**
